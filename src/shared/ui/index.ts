@@ -1,3 +1,4 @@
 import Logo from './Logo/index.vue'
+import Counter from './Counter/index.vue'
 
-export { Logo }
+export { Logo, Counter }

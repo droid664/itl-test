@@ -1,9 +1,3 @@
 <template>
-  <div class="index-page">
-    <Logo />
-  </div>
+  <div class="index-page"></div>
 </template>
-
-<script lang="ts" setup>
-import { Logo } from '../../../shared'
-</script>
