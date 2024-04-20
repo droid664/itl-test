@@ -23,11 +23,10 @@ body {
   overflow-x: hidden;
   font-family: var(--default-font-family);
   color: var(--brown);
-}
-
-body.lock {
-  overflow: hidden;
-  touch-action: none;
+  &:has(.modal--active) {
+    overflow: hidden;
+    touch-action: none;
+  }
 }
 
 .container {
