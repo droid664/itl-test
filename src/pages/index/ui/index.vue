@@ -5,7 +5,7 @@
     <SearchMember />
     <MemberListWidget />
     <MemberModal />
-    <button type="button" />
+    <MemberModalButton />
   </div>
 </template>
 
@@ -14,4 +14,5 @@ import { SearchMember } from '../../../features/MemberSearch'
 import { MemberListWidget, MemberVisitors } from '../../../widgets'
 import { MemberFilter } from '../../../features/MemberFilter'
 import { MemberModal } from '../../../widgets'
+import { MemberModalButton } from '../../../features/MemberAddButton'
 </script>
