@@ -9,6 +9,7 @@ export const useMemberStore = defineStore(
   'MemberStore',
   () => {
     const members = ref<IMember[]>([])
+    const searchName = ref('')
 
     const addMember = (member: MemberData): void => {
       members.value.push({
@@ -26,18 +27,33 @@ export const useMemberStore = defineStore(
       })
     }
 
-    const getMembers = computed(() => {
-      return members.value
+    const setSearch = (val: string) => {
+      searchName.value = val
+    }
+
+    const getMemberFilter = computed(() => {
+      return members.value.filter((m) => {
+        if (searchName.value && !m.fullName.includes(searchName.value)) {
+          return false
+        }
+
+        return true
+      })
     })
 
     return {
       members,
+      searchName,
+      setSearch,
       addMember,
       changeMember,
-      getMembers,
+      getMemberFilter,
     }
   },
   {
-    persist: true,
+    persist: {
+      storage: localStorage,
+      paths: ['members'],
+    },
   },
 )

@@ -1,11 +1,16 @@
 <template>
   <div class="member-list">
-    <template v-if="members">
+    <template v-if="getMemberFilter.length">
       <header class="member-list__header">
         <span v-for="col of columns" :key="col">{{ col }}</span>
       </header>
       <div class="member-list__wrapper">
-        <a href="#" v-for="(member, index) of members" :key="member.id" class="member-list__item">
+        <a
+          href="#"
+          v-for="(member, index) of getMemberFilter"
+          :key="member.id"
+          class="member-list__item"
+        >
           <div class="member-list__index">{{ index + 1 }}</div>
           <h3 class="member-list__fullname">{{ member.fullName }}</h3>
           <span class="member-list__company">{{ member.company }}</span>
@@ -31,7 +36,7 @@ import { storeToRefs } from 'pinia'
 const columns = ref(['Номер', 'ФИО', 'Компания', 'Группа', 'Присутствие'])
 
 const memberStore = MemberModel()
-const { members } = storeToRefs(memberStore)
+const { getMemberFilter } = storeToRefs(memberStore)
 </script>
 
 <style lang="scss">
