@@ -1,5 +1,5 @@
 <template>
-  <div class="modal">
+  <div class="modal" :class="[isShow ? 'modal--active' : '']">
     <div @click.self="$emit('close')" class="modal__body">
       <div class="modal__content">
         <slot></slot>
@@ -10,6 +10,10 @@
 </template>
 
 <script lang="ts" setup>
+const { isShow } = defineProps<{
+  isShow: boolean
+}>()
+
 defineEmits(['close'])
 </script>
 
