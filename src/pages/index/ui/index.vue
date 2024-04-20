@@ -1,5 +1,6 @@
 <template>
   <div class="index-page">
+    <MemberVisitors />
     <MemberFilter />
     <SearchMember />
     <MemberListWidget />
@@ -8,6 +9,6 @@
 
 <script setup lang="ts">
 import { SearchMember } from '../../../features/MemberSearch'
-import { MemberListWidget } from '../../../widgets'
+import { MemberListWidget, MemberVisitors } from '../../../widgets'
 import { MemberFilter } from '../../../features/MemberFilter'
 </script>
