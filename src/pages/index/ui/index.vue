@@ -4,6 +4,7 @@
     <MemberFilter />
     <SearchMember />
     <MemberListWidget />
+    <Modal></Modal>
   </div>
 </template>
 
@@ -11,4 +12,5 @@
 import { SearchMember } from '../../../features/MemberSearch'
 import { MemberListWidget, MemberVisitors } from '../../../widgets'
 import { MemberFilter } from '../../../features/MemberFilter'
+import { Modal } from '../../../shared'
 </script>
