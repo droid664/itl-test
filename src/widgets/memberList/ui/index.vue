@@ -1,30 +1,32 @@
 <template>
   <div class="member-list">
-    <template v-if="getMemberFilter.length">
-      <header class="member-list__header">
-        <span v-for="col of columns" :key="col">{{ col }}</span>
-      </header>
-      <div class="member-list__wrapper">
-        <a
-          href="#"
-          v-for="(member, index) of getMemberFilter"
-          :key="member.id"
-          class="member-list__item"
-        >
-          <div class="member-list__index">{{ index + 1 }}</div>
-          <h3 class="member-list__fullname">{{ member.fullName }}</h3>
-          <span class="member-list__company">{{ member.company }}</span>
-          <span class="member-list__group">{{ member.group }}</span>
-          <span
-            class="member-list__status"
-            :class="[member.presence ? 'member-list__status--present' : '']"
-          ></span>
-        </a>
-      </div>
-    </template>
-    <template v-else>
-      <h2>Список пуст :(</h2>
-    </template>
+    <div class="container">
+      <template v-if="getMemberFilter.length">
+        <header class="member-list__header">
+          <span v-for="col of columns" :key="col">{{ col }}</span>
+        </header>
+        <div class="member-list__wrapper">
+          <a
+            href="#"
+            v-for="(member, index) of getMemberFilter"
+            :key="member.id"
+            class="member-list__item"
+          >
+            <div class="member-list__index">{{ index + 1 }}</div>
+            <h3 class="member-list__fullname">{{ member.fullName }}</h3>
+            <span class="member-list__company">{{ member.company }}</span>
+            <span class="member-list__group">{{ member.group }}</span>
+            <span
+              class="member-list__status"
+              :class="[member.presence ? 'member-list__status--present' : '']"
+            ></span>
+          </a>
+        </div>
+      </template>
+      <template v-else>
+        <h2>Список пуст :(</h2>
+      </template>
+    </div>
   </div>
 </template>
 
