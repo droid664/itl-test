@@ -19,6 +19,10 @@
             <Checkbox v-model="field.value" />
           </template>
         </div>
+        <div class="form__bottom">
+          <Button type="submit" text="Добавить" color="green" />
+          <Button type="button" text="Отмена" color="gray" />
+        </div>
       </form>
     </Modal>
   </Teleport>
@@ -31,6 +35,7 @@ import { ref } from 'vue'
 import { Input } from '../../../shared'
 import { Select } from '../../../shared'
 import { Checkbox } from '../../../shared'
+import { Button } from '../../../shared'
 
 const modalStore = MemberModal()
 
@@ -97,10 +102,18 @@ console.log(fields)
         margin-bottom: 48px;
       }
     }
+    .input {
+      font-size: 30px;
+      color: var(--black);
+    }
     .input,
     .select__value {
       width: 502px;
     }
+  }
+  &__bottom {
+    display: flex;
+    gap: 34px;
   }
 }
 </style>
