@@ -1,5 +1,1 @@
-export enum MemberGroup {
-  PASSERBY = 'Прохожий',
-  CLIENT = 'Клиент',
-  PARTNER = 'Партнёр',
-}
+export type MemberGroup = 'Прохожий' | 'Клиент' | 'Партнёр'

@@ -1,23 +1,22 @@
 <template>
   <Teleport to="body">
     <Modal :isShow="modalStore.isShow">
-      <form class="form">
-        <div
-          v-for="field of Object.values(fields)"
-          :key="field.name"
-          class="form__item"
-          :class="field.className"
-        >
-          <p class="form__item-name">{{ field.name }}</p>
-          <template v-if="field.type === 'text'">
-            <Input v-model="field.value" />
-          </template>
-          <template v-if="field.type === 'select' && field.options">
-            <Select :options="field.options" />
-          </template>
-          <template v-if="field.type === 'checkbox'">
-            <Checkbox v-model="field.value" />
-          </template>
+      <form @submit.prevent="handleSubmit" class="form">
+        <div class="form__item form__item--fio">
+          <div class="form__item-name">ФИО</div>
+          <Input v-model="fullName" />
+        </div>
+        <div class="form__item form__item--company">
+          <div class="form__item-name">Компания</div>
+          <Input v-model="company" />
+        </div>
+        <div class="form__item form__item--company">
+          <div class="form__item-name">Группа</div>
+          <Select v-model:selected="selected" :options="GROUP" />
+        </div>
+        <div class="form__item form__item--company">
+          <div class="form__item-name">Группа</div>
+          <Checkbox v-model:checked="present" />
         </div>
         <div class="form__bottom">
           <Button type="submit" text="Добавить" color="green" />
@@ -31,51 +30,46 @@
 <script lang="ts" setup>
 import { MemberModal } from '../model'
 import { Modal } from '../../../shared'
-import { ref } from 'vue'
 import { Input } from '../../../shared'
 import { Select } from '../../../shared'
 import { Checkbox } from '../../../shared'
 import { Button } from '../../../shared'
+import { ref } from 'vue'
+import { MemberModel } from '../../../entites/member'
+import { MemberGroup } from '../../../entites/member/types/group.enum'
 
+const GROUP = ['Прохожий', 'Клиент', 'Партнер']
 const modalStore = MemberModal()
+const memberStore = MemberModel()
+const fullName = ref('')
+const company = ref('')
+const selected = ref<MemberGroup | ''>('')
+const present = ref(false)
 
 modalStore.$patch({
   isShow: true,
 })
 
-const fields = ref([
-  {
-    name: 'ФИО',
-    type: 'text',
-    required: true,
-    value: '',
-    className: 'form__item-name--fio',
-  },
-  {
-    name: 'Компания',
-    type: 'text',
-    required: true,
-    value: '',
-    className: 'form__item-name--company',
-  },
-  {
-    name: 'Группа',
-    type: 'select',
-    options: ['Прохожий', 'Клиент', 'Партнер'],
-    required: true,
-    value: '',
-    className: 'form__item-name--group',
-  },
-  {
-    name: 'Присутсвие',
-    type: 'checkbox',
-    required: true,
-    value: false,
-    className: 'form__item-name--presence',
-  },
-])
+const handleSubmit = () => {
+  if (!fullName.value || !selected.value || !company.value) {
+    alert('Все поля обязательны к заполнению!')
+    return
+  }
 
-console.log(fields)
+  memberStore.addMember({
+    fullName: fullName.value,
+    company: company.value,
+    group: selected.value,
+    presence: present.value,
+  })
+
+  modalStore.setIsShow(false)
+
+  fullName.value = ''
+  company.value = ''
+  selected.value = ''
+  present.value = false
+}
 </script>
 
 <style lang="scss">
@@ -83,24 +77,24 @@ console.log(fields)
   &__item {
     display: flex;
     align-items: center;
+    &--fio {
+      margin-bottom: 40px;
+    }
+    &--company {
+      margin-bottom: 57px;
+    }
+    &--group {
+      margin-bottom: 75px;
+    }
+    &--presence {
+      margin-bottom: 48px;
+    }
     &-name {
       margin-bottom: 0;
       min-width: 275px;
       padding-right: 20px;
       font-size: 32px;
       font-weight: 600;
-      &--fio {
-        margin-bottom: 40px;
-      }
-      &--company {
-        margin-bottom: 57px;
-      }
-      &--group {
-        margin-bottom: 75px;
-      }
-      &--presence {
-        margin-bottom: 48px;
-      }
     }
     .input {
       font-size: 30px;
