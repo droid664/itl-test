@@ -1,6 +1,6 @@
 <template>
   <Teleport to="body">
-    <Modal :isShow="modalStore.isShow">
+    <Modal :isShow="Boolean(IS_MODAL_ACTIVE)">
       <form @submit.prevent="handleSubmit" class="form">
         <div class="form__item form__item--fio">
           <div class="form__item-name">ФИО</div>
@@ -28,27 +28,23 @@
 </template>
 
 <script lang="ts" setup>
-import { MemberModal } from '../model'
 import { Modal } from '../../../shared'
 import { Input } from '../../../shared'
 import { Select } from '../../../shared'
 import { Checkbox } from '../../../shared'
 import { Button } from '../../../shared'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { MemberModel } from '../../../entites/member'
 import { MemberGroup } from '../../../entites/member/types/group.enum'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const GROUP = ['Прохожий', 'Клиент', 'Партнер']
-const modalStore = MemberModal()
 const memberStore = MemberModel()
 const fullName = ref('')
 const company = ref('')
 const selected = ref<MemberGroup | ''>('')
 const present = ref(false)
-
-modalStore.$patch({
-  isShow: true,
-})
 
 const handleSubmit = () => {
   if (!fullName.value || !selected.value || !company.value) {
@@ -63,13 +59,15 @@ const handleSubmit = () => {
     presence: present.value,
   })
 
-  modalStore.setIsShow(false)
-
   fullName.value = ''
   company.value = ''
   selected.value = ''
   present.value = false
 }
+
+const IS_MODAL_ACTIVE = computed(() => {
+  return route.query.modal && route.query.modal === 'member'
+})
 </script>
 
 <style lang="scss">

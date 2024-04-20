@@ -5,6 +5,7 @@
     <SearchMember />
     <MemberListWidget />
     <MemberModal />
+    <button type="button" />
   </div>
 </template>
 
