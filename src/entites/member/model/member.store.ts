@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { IMember } from '../types/member.interface'
 import { computed, ref } from 'vue'
 import { nanoid } from 'nanoid'
+import { Filter } from '../types/filter.type'
 
 type MemberData = Omit<IMember, 'id'>
 
@@ -10,6 +11,7 @@ export const useMemberStore = defineStore(
   () => {
     const members = ref<IMember[]>([])
     const searchName = ref('')
+    const filter = ref<Filter>('none')
 
     const addMember = (member: MemberData): void => {
       members.value.push({
@@ -31,20 +33,38 @@ export const useMemberStore = defineStore(
       searchName.value = val
     }
 
+    const setFilter = (val: Filter) => {
+      filter.value = val
+    }
+
     const getMemberFilter = computed(() => {
       return members.value.filter((m) => {
         if (searchName.value && !m.fullName.includes(searchName.value)) {
           return false
         }
 
-        return true
+        if (filter.value === 'none') {
+          return true
+        }
+
+        if (filter.value === 'present' && m.presence) {
+          return true
+        }
+
+        if (filter.value === 'absent' && !m.presence) {
+          return true
+        }
+
+        return false
       })
     })
 
     return {
       members,
       searchName,
+      filter,
       setSearch,
+      setFilter,
       addMember,
       changeMember,
       getMemberFilter,
