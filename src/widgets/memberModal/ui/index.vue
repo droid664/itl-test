@@ -4,11 +4,11 @@
       <form @submit.prevent="handleSubmit" class="form">
         <div class="form__item form__item--fio">
           <div class="form__item-name">ФИО</div>
-          <Input v-model="fullName" />
+          <Input v-model:value="fullName" />
         </div>
         <div class="form__item form__item--company">
           <div class="form__item-name">Компания</div>
-          <Input v-model="company" />
+          <Input v-model:value="company" />
         </div>
         <div class="form__item form__item--company">
           <div class="form__item-name">Группа</div>
