@@ -41,6 +41,10 @@ export const useMemberStore = defineStore(
       return members.value.find((m) => m.id === id)
     }
 
+    const findIndex = (id: string) => {
+      return members.value.findIndex((m) => m.id === id)
+    }
+
     const getMemberFilter = computed(() => {
       return members.value.filter((m) => {
         if (searchName.value && !m.fullName.includes(searchName.value)) {
@@ -80,6 +84,7 @@ export const useMemberStore = defineStore(
       setFilter,
       addMember,
       changeMember,
+      findIndex,
       getPresent,
       getAbsent,
       getMemberFilter,

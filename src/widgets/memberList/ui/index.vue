@@ -9,11 +9,11 @@
           <a
             @click.prevent="openMemberModal(member.id)"
             href="#"
-            v-for="(member, index) of getMemberFilter"
+            v-for="member of getMemberFilter"
             :key="member.id"
             class="member-list__item"
           >
-            <div class="member-list__index">{{ index + 1 }}</div>
+            <div class="member-list__index">{{ memberStore.findIndex(member.id) + 1 }}</div>
             <h3 class="member-list__fullname">{{ member.fullName }}</h3>
             <span class="member-list__company">{{ member.company }}</span>
             <span class="member-list__group">{{ member.group }}</span>
