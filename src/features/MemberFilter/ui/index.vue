@@ -1,14 +1,23 @@
 <template>
   <div class="member-filters">
-    <h3>Фильтровать по:</h3>
-    <ul class="member-filters__list">
-      <li class="member-filters__item">
-        <label v-for="filter of filters" :key="filter.value">
-          {{ filter.name }}
-          <input v-model="current" type="radio" name="filter-radio-button" :value="filter.value" />
-        </label>
-      </li>
-    </ul>
+    <div class="container">
+      <div class="member-filters__inner">
+        <h3>Фильтровать по:</h3>
+        <ul class="member-filters__list">
+          <li class="member-filters__item">
+            <label v-for="filter of filters" :key="filter.value">
+              {{ filter.name }}
+              <input
+                v-model="current"
+                type="radio"
+                name="filter-radio-button"
+                :value="filter.value"
+              />
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -47,8 +56,10 @@ watch(current, () => {
 
 <style lang="scss">
 .member-filters {
-  display: flex;
-  align-items: center;
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
   h3 {
     margin-bottom: 0;
     font-size: 30px;

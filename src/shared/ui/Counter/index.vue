@@ -25,6 +25,7 @@ const { title, leftValue, rightValue } = defineProps<{
     margin-bottom: 10px;
   }
   &__values {
+    text-align: right;
     span {
       &:first-child {
         margin-right: 12px;

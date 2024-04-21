@@ -1,18 +1,19 @@
 <template>
   <div class="index-page">
-    <MemberVisitors />
-    <MemberFilter />
-    <SearchMember />
+    <MemberHeader>
+      <template #count>
+        <MemberVisitors />
+      </template>
+    </MemberHeader>
     <MemberListWidget />
+    <MemberFilter />
     <MemberModal />
-    <MemberModalButton />
   </div>
 </template>
 
 <script setup lang="ts">
-import { SearchMember } from '../../../features/MemberSearch'
 import { MemberListWidget, MemberVisitors } from '../../../widgets'
 import { MemberFilter } from '../../../features/MemberFilter'
 import { MemberModal } from '../../../widgets'
-import { MemberModalButton } from '../../../features/MemberAddButton'
+import { MemberHeader } from '../../../widgets/memberHeader'
 </script>
