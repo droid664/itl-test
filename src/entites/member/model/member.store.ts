@@ -37,6 +37,10 @@ export const useMemberStore = defineStore(
       filter.value = val
     }
 
+    const findOne = (id: string) => {
+      return members.value.find((m) => m.id === id)
+    }
+
     const getMemberFilter = computed(() => {
       return members.value.filter((m) => {
         if (searchName.value && !m.fullName.includes(searchName.value)) {
@@ -62,6 +66,7 @@ export const useMemberStore = defineStore(
     const getPresent = computed(() => {
       return members.value.filter((m) => m.presence)
     })
+
     const getAbsent = computed(() => {
       return members.value.filter((m) => !m.presence)
     })
@@ -70,6 +75,7 @@ export const useMemberStore = defineStore(
       members,
       searchName,
       filter,
+      findOne,
       setSearch,
       setFilter,
       addMember,

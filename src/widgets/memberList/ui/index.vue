@@ -7,6 +7,7 @@
         </header>
         <div class="member-list__wrapper">
           <a
+            @click.prevent="openMemberModal(member.id)"
             href="#"
             v-for="(member, index) of getMemberFilter"
             :key="member.id"
@@ -34,11 +35,21 @@
 import { ref } from 'vue'
 import { MemberModel } from '../../../entites/member'
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
 
 const columns = ref(['Номер', 'ФИО', 'Компания', 'Группа', 'Присутствие'])
-
+const router = useRouter()
 const memberStore = MemberModel()
 const { getMemberFilter } = storeToRefs(memberStore)
+
+const openMemberModal = (id: string) => {
+  router.push({
+    query: {
+      modal: 'member',
+      memberId: id,
+    },
+  })
+}
 </script>
 
 <style lang="scss">
