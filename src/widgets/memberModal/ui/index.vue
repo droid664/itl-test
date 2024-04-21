@@ -33,7 +33,7 @@ import { Input } from '../../../shared'
 import { Select } from '../../../shared'
 import { Checkbox } from '../../../shared'
 import { Button } from '../../../shared'
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { MemberModel } from '../../../entites/member'
 import { MemberGroup } from '../../../entites/member/types/group.enum'
 import { useRoute, useRouter } from 'vue-router'
@@ -113,6 +113,10 @@ const fillFields = () => {
 
 const IS_MODAL_ACTIVE = computed(() => {
   return route.query.modal && route.query.modal === 'member'
+})
+
+onMounted(() => {
+  fillFields()
 })
 
 watch(IS_MODAL_ACTIVE, (state) => {
