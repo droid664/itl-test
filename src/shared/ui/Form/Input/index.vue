@@ -3,6 +3,8 @@
 </template>
 
 <script setup lang="ts">
+import { withDefaults, defineProps, defineModel } from 'vue'
+
 export interface Props {
   placeholder?: string
   name?: string
