@@ -25,7 +25,9 @@
         </div>
       </template>
       <template v-else>
-        <h2>Список пуст :(</h2>
+        <div class="member-list__empty">
+          <h2>Список пуст :(</h2>
+        </div>
       </template>
     </div>
   </div>
@@ -58,6 +60,12 @@ const openMemberModal = (id: string) => {
   &__item {
     display: grid;
     grid-template-columns: 11% 26% 21% 1fr 120px;
+  }
+  .container {
+    &:has(.member-list__empty) {
+      min-height: 100%;
+      display: flex;
+    }
   }
   &__header {
     border-bottom: 4px solid var(--gray-100);
@@ -118,6 +126,14 @@ const openMemberModal = (id: string) => {
     display: flex;
     flex-direction: column;
     gap: 30px;
+  }
+  &__empty {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
   }
 }
 </style>
