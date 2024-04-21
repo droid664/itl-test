@@ -1,10 +1,14 @@
 <template>
-  <Counter title="Посетители" :leftValue="getPresent.length" :rightValue="getAbsent.length" />
+  <Counter
+    title="Посетители"
+    :leftValue="memberStore.getPresent.length"
+    :rightValue="memberStore.getAbsent.length"
+  />
 </template>
 
 <script lang="ts" setup>
 import { MemberModel } from '../../../entites/member'
 import { Counter } from '../../../shared'
 
-const { getPresent, getAbsent } = MemberModel()
+const memberStore = MemberModel()
 </script>
